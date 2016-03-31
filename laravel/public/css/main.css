@@ -1,0 +1,21 @@
+/*
+font-family: 'Montserrat', sans-serif;
+font-family: 'Lora', serif;
+font-family: 'Tangerine', cursive;
+*/
+body {
+    font-family: "Tangerine";
+    font-size: 24px;
+}
+
+#main-content {
+    border: 2px solid black;
+    width: 60%;
+    margin: 0 auto;
+    padding: 10px;
+    text-align: center;
+}
+
+#main-content div {
+    border: 1px solid black;
+}
