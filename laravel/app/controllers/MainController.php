@@ -9,10 +9,12 @@ class MainController extends \BaseController {
 	 */
 	public function index()
 	{
-        $story = "";
-        $query = DB::table('posts')->where('id', 0)->first();
+        $story = array();
+        $query = DB::table('posts')->get();
         if($query != NULL){
-            $story = $query;
+            foreach($query as $q){
+                array_push($story, $q->content);
+            }
         }
 		return View::make('main/create')->with('posts', $story);
 	}
@@ -36,26 +38,20 @@ class MainController extends \BaseController {
 	 */
 	public function store()
 	{   
-        $toAdd = "";
-        $temp = "";
+        $toAdd = array();
 		$append = Input::get('post');
-        $story = DB::table('posts')->where('id', 0)->first();
+        $story = DB::table('posts')->get();
         if(!$story == NULL){
-            //handle regular input
-            $toAdd = $story . ' ' . $append;
-        }else{
-            //handle first input
-            $toAdd = $append;
-            DB::table('posts')->insert(array('content'=>$toAdd));
-            return View::make('main/create')->with('posts', $toAdd);
+            foreach($story as $s){
+                array_push($toAdd, $s->content);
+            }
         }
-        die("not null");
-        DB::table('posts')->where('id', 0)->update(array('content'=>$toAdd));
-        return View::make('main/create')->with('posts', $toAdd);
-        /*
-            {{ HTML::style('css/main.css') }}
-    <link href='https://fonts.googleapis.com/css?family=Montserrat|Lora|Tangerine' rel='stylesheet' type='text/css'>
-        */
+        if($append != NULL){
+            array_push($toAdd, $append);
+            DB::table('posts')->insert(array('content'=>$append));            
+        }
+        return Redirect::to('main');
+        
 	}
 
 
