@@ -9,7 +9,12 @@ class MainController extends \BaseController {
 	 */
 	public function index()
 	{
-		return View::make('main/create');
+        $story = "";
+        $query = DB::table('posts')->where('id', 0)->first();
+        if($query != NULL){
+            $story = $query;
+        }
+		return View::make('main/create')->with('posts', $story);
 	}
 
 
@@ -30,8 +35,27 @@ class MainController extends \BaseController {
 	 * @return Response
 	 */
 	public function store()
-	{
-		// TODO: Save content to database xddddddddd
+	{   
+        $toAdd = "";
+        $temp = "";
+		$append = Input::get('post');
+        $story = DB::table('posts')->where('id', 0)->first();
+        if(!$story == NULL){
+            //handle regular input
+            $toAdd = $story . ' ' . $append;
+        }else{
+            //handle first input
+            $toAdd = $append;
+            DB::table('posts')->insert(array('content'=>$toAdd));
+            return View::make('main/create')->with('posts', $toAdd);
+        }
+        die("not null");
+        DB::table('posts')->where('id', 0)->update(array('content'=>$toAdd));
+        return View::make('main/create')->with('posts', $toAdd);
+        /*
+            {{ HTML::style('css/main.css') }}
+    <link href='https://fonts.googleapis.com/css?family=Montserrat|Lora|Tangerine' rel='stylesheet' type='text/css'>
+        */
 	}
 
 
