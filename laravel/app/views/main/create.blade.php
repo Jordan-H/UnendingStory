@@ -17,7 +17,7 @@ Author: Jason Cheung
 
     <div id="social-media">
         <a href="mailto:unendingstory@gmail.com" class="icons" style="color: black">&#xe010;</a>
-        <a href="https://twitter.com/Unending_Story" class="icons" style="color: red">&#xe096;</a>
+        <a href="https://twitter.com/Unending_Story" class="icons" style="color: blue">&#xe094;</a>
         <a href="https://www.facebook.com/people/Unending-Story/100011687526998" class="icons" style="color: #3B5998">&#xe093;</a>
     </div>
 
